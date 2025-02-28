@@ -1,0 +1,62 @@
+weather:
+  api:
+    key: 5c3b85192fae33cfab9f6f28254316a6
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id:  392036709652-ok7kmk0eol5k8l8uavsa5fm4v53lkkrq.apps.googleusercontent.com
+            client-secret: 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
+  main:
+    allow-circular-references: true
+  server:
+    port: ${SERVER_PORT}
+    servlet:
+      context-path: /journal
+  redis:
+    data:
+      host: localhost
+      port: 15641
+      password: kbnr1234
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: journaldb
+      auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: shreshthajit.das@bedatasolutions.com
+    password: sebr jziw qvwu crqb
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVERS}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: weekly-sentiment-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: net.engineeringdigest.journalApp.model
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='X' password='X';
+      session:
+        timeout:
+          ms: 45000
